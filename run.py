@@ -2,7 +2,8 @@ import pygame
 from pygame.locals import *
 from constants import *
 from pacman import Pacman 
-
+from nodes import Node
+from nodes import NodeGroup
 
 
 class GameColtroller(object):
@@ -17,10 +18,7 @@ class GameColtroller(object):
         self.background = pygame.surface.Surface(SCREENSIZE)
         self.background.fill(BLACK)
         
-        
-    def startGame(self):
-        self.setBackground()
-        self.pacman = Pacman()
+
         
     def update(self):
         dt = self.clock.tick(30) / 1000.0
@@ -32,12 +30,23 @@ class GameColtroller(object):
         for event in pygame.event.get():
             if event.type == QUIT:
                 exit()
+                
+    def startGame(self):
+        self.setBackground()
+        self.nodes = NodeGroup()
+        self.nodes.setupTestNodes()
+        self.pacman = Pacman(self.nodes.nodeList[0])
     
     
     def render(self):
         self.screen.blit(self.background,(0, 0))
+        self.nodes.render(self.screen)
         self.pacman.render(self.screen)
         pygame.display.update()
+        
+        
+
+
         
         
 
