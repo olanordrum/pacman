@@ -6,16 +6,16 @@ from constants import *
 class Node(object):
     def __init__(self,x,y):
         self.position = Vector2(x, y)
-        self.neighbours = {UP:None,RIGHT:None,LEFT:None,RIGHT:None,}
+        self.neighbors = {UP:None, RIGHT:None, LEFT:None, RIGHT:None,}
         
         
     def render(self, screen):
-        for n in self.neighbours.keys():
-            if self.neighbours[n] is not None:
+        for n in self.neighbors.keys():
+            if self.neighbors[n] is not None:
                 line_start = self.position.asTuple()
-                line_end = self.neighbours[n].position.asTuple()
+                line_end = self.neighbors[n].position.asTuple()
                 pygame.draw.line(screen, WHITE, line_start, line_end, 4)
-                pygame.draw.circle(screen, RED, self.position.asInt(), line_end, 12)
+                pygame.draw.circle(screen, RED, self.position.asInt(), 12)
                 
 
 class NodeGroup(object):
@@ -48,6 +48,8 @@ class NodeGroup(object):
         nodeG.neighbors[UP] = nodeE
         nodeG.neighbors[LEFT] = nodeF
         self.nodeList = [nodeA, nodeB, nodeC, nodeD, nodeE, nodeF, nodeG]
+        
+        
         
     def render(self, screen):
         for node in self.nodeList:
