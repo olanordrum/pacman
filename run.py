@@ -2,7 +2,6 @@ import pygame
 from pygame.locals import *
 from constants import *
 from pacman import Pacman 
-from nodes import Node
 from nodes import NodeGroup
 
 
