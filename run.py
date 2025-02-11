@@ -32,9 +32,10 @@ class GameColtroller(object):
                 
     def startGame(self):
         self.setBackground()
-        self.nodes = NodeGroup()
-        self.nodes.setupTestNodes()
-        self.pacman = Pacman(self.nodes.nodeList[0])
+        self.nodes = NodeGroup("mazetest.txt")
+        #self.nodes.setupTestNodes()
+        #self.pacman = Pacman(self.nodes.nodeList[0])
+        self.pacman = Pacman(self.nodes.getStartTemoNode())
     
     
     def render(self):
