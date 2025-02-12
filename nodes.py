@@ -99,7 +99,7 @@ class NodeGroup(object):
         return None
     
     
-    def getStartTemoNode(self):
+    def getStartTempNode(self):
         nodes = list(self.nodesLUT.values())
         return nodes[0]
     

@@ -33,7 +33,8 @@ class GameColtroller(object):
     def startGame(self):
         self.setBackground()
         self.nodes = NodeGroup("maze1.txt")
-        self.pacman = Pacman(self.nodes.getStartTemoNode())
+        self.pacman = Pacman(self.nodes.getStartTempNode())
+        self.ghost = Ghost(self.nodes.getStartTempNode())
     
     
     def render(self):

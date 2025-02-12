@@ -1,5 +1,4 @@
 import pygame
-from pygame.locals import *
 from vector import Vector2
 from constants import *
 
@@ -26,7 +25,7 @@ class Pacman(object):
         direction = self.getValidKey()
         
         
-        if self.overshootTarget():
+        if self.overshotTarget():
             self.node = self.target
             self.target = self.getNewTarget(direction)
             
