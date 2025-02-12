@@ -34,7 +34,6 @@ class NodeGroup(object):
    
         
     def render(self, screen):
-        #for node in self.nodeList:
         for node in self.nodesLUT.values():
             node.render(screen)
             
