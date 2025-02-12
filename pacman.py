@@ -1,23 +1,16 @@
 import pygame
 from vector import Vector2
+from entity import Entity
+from pygame.locals import *
 from constants import *
 
 
-
-class Pacman(object):
+class Pacman(Entity):
     def __init__(self, node):
+        Entity.__init__(self, node )
         self.name = PACMAN
-        self.directions = {UP:Vector2(0,-1), DOWN : Vector2(0,1),LEFT:Vector2(-1,0),RIGHT:Vector2(1,0), STOP:Vector2(), }
-        self.direction = STOP
-        self.speed = 100 * TILEWIDTH/16
-        self.radius = 10
         self.color = YELLOW
-        self.node = node
-        self.setPosition()
-        self.target = node
         
-    def setPosition(self):
-        self.position = self.node.position.copy()
         
         #dt -> time since last update
     def update(self,dt):
@@ -42,19 +35,7 @@ class Pacman(object):
             if self.oppositeDirection(direction):
                 self.reverseDirection()
         
-    def validDirection(self, direction):
-        if direction is not STOP:
-            if self.node.neighbors.get(direction) is not None:
-                return True
-        return False
-    
-    
-    def getNewTarget(self, direction):
-        if self.validDirection(direction):
-            return self.node.neighbors[direction]
-        return self.node
-        
-        
+
     def getValidKey(self):
         key_pressed = pygame.key.get_pressed()
         if key_pressed[K_UP]:
@@ -72,25 +53,3 @@ class Pacman(object):
     def render(self, screen):
         p = self.position.asInt()
         pygame.draw.circle(screen,self.color,p,self.radius)
-        
-        
-    def overshootTarget(self):
-        if self.target is not None:
-            vec1 = self.target.position - self.node.position
-            vec2 = self.position - self.node.position
-            node2Target = vec1.magnitudeSquared()
-            node2self = vec2.magnitudeSquared()
-            return node2self >= node2Target
-        return False
-    
-    def reverseDirection(self):
-        self.direction *= -1
-        temp = self.node
-        self.node = self.target
-        self.target = temp
-        
-    def oppositeDirection(self, direction):
-        if direction is not STOP:
-            if direction == self.direction * -1:
-                return True
-            return False
